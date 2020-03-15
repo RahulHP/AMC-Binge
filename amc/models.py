@@ -63,3 +63,18 @@ class Showtime(db.Model):
         return '{name} - {start} : {end}'.format(name=self.movie_name, theatre=self.theatre_id,
                                                  start=self.official_start_time.strftime('%I:%M %p'),
                                                  end=self.predicted_end_time.strftime('%I:%M %p'))
+
+
+class Result(db.Model):
+    __tablename__ = 'Results'
+    theatre_id = db.Column(db.Integer, primary_key=True)
+    show_date = db.Column(db.Date, primary_key=True)
+    showtime1_id = db.Column(db.Integer, primary_key=True)
+    showtime2_id = db.Column(db.Integer, primary_key=True)
+    waiting_time = db.Column(db.Integer)
+
+    movie1_id = db.Column(db.Integer)
+    movie2_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '{m1} - {w} - {m2}'.format(m1=self.movie1_id, w=self.waiting_time, m2=self.movie2_id)
