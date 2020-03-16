@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>AMCBingeV2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light navbar-expand-md">
+            <div class="container-fluid"><a class="navbar-brand" href="#">AMC Binge</a></div>
+        </nav>
+        <div class="row">
+            <div class="col col-3">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="d-flex flex-column"><span style="font-family: Roboto, sans-serif;font-weight: 700">Theatre</span><span style="font-family: Roboto, sans-serif;">{{ selected_theatre.theatre_name }}</span></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex flex-column"><span style="font-family: Roboto, sans-serif;font-weight: 700">Date</span><span style="font-family: Roboto, sans-serif;">{{ selected_showdate.show_date.strftime('%d %B %Y') }}</span></div>
+                    </li>
+                    <li class="list-group-item active"><span>Movies</span></li>
+                    <li class="list-group-item disabled"><span>Results</span></li>
+                </ul>
+            </div>
+            {%- for column in movies|slice(3) %}
+            <div class="col col-3">
+                <ul class="list-group">
+                    {% for movie in column %}
+                    <a href="#" class="list-group-item list-group-item-action movie_item" id="{{ movie.movie_id }}">
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="/static/img/{{ movie.movie_id }}.png" style="width: 120px;height: 120px;border-radius:50%;box-shadow: inset 0 0 0 1px hsla(0,0%,0%,0.1);">
+                            <span>{{ movie.movie_name }}</span>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            {%- endfor %}
+        </div>
+        <div class="row">
+            <div class="col">
+            <form method="post" id="submitform">
+                <input id="movies" type="hidden" name="movies" value="">
+                <button class="btn btn-primary" id="submit" type="submit" style="float: right">Next</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    var selected_movies = new Set();
+
+    $('.movie_item').click(function (e) {
+        {#https://stackoverflow.com/a/26178517#}
+        e.preventDefault();
+        var movie_id = $(this).attr('id');
+        if ($(this).hasClass('active')){
+            selected_movies.delete(movie_id);
+        } else {
+            selected_movies.add(movie_id);
+        }
+        $(this).toggleClass('active');
+        $('#movies').attr('value', Array.from(selected_movies).join('|'));
+    });
+</script>
+</body>
+
+</html>

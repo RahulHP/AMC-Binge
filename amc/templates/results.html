@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>AMCBingeV2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light navbar-expand-md">
+            <div class="container-fluid"><a class="navbar-brand" href="#">AMC Binge</a></div>
+        </nav>
+        <div class="row">
+            <div class="col col-3">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="d-flex flex-column"><span>Theatre</span><span>{{ selected_theatre.theatre_name }}</span></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex flex-column"><span>Date</span><span>{{ selected_showdate.show_date.strftime('%d %B %Y') }}</span></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex flex-column"><span>Movies</span><span>{{ selected_movie_ids|length }} Movies selected</span></div>
+                    </li>
+                    <li class="list-group-item active"><span>Results</span></li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul class="list-group">
+                    {% for result in results %}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col col-2">
+                                <div class="d-flex flex-column">
+                                    <span>{{ result[1].official_start_time.strftime('%I:%M %p') }}</span>
+                                    <span>{{ result[2].predicted_end_time.strftime('%I:%M %p') }}</span>
+                                </div>
+                                <span class="badge badge-pill badge-success">{{ result[0].waiting_time }} min</span></div>
+                            <div class="col col-2"><img src="/static/img/{{ result[1].movie_id}}.png" style="width: 120px;height: 120px;border-radius:50%"></div>
+                            <div class="col col-3">
+                                <div class="d-flex flex-column"><span>{{ result[1].movie_name }}</span><button class="btn btn-primary" type="button">{{ result[1].official_start_time.strftime('%I:%M %p') }}</button><span>Expected Showtime:<br>{{ result[1].predicted_start_time.strftime('%I:%M %p') }} - {{ result[1].predicted_end_time.strftime('%I:%M %p') }}</span></div>
+                            </div>
+                            <div class="col col-2"><img src="/static/img/{{ result[2].movie_id}}.png" style="width: 120px;height: 120px;border-radius:50%"></div>
+                            <div class="col col-3">
+                                <div class="d-flex flex-column"><span>{{ result[2].movie_name }}</span><button class="btn btn-primary" type="button">{{ result[2].official_start_time.strftime('%I:%M %p') }}</button><span>Expected Showtime:<br>{{ result[2].predicted_start_time.strftime('%I:%M %p') }} - {{ result[2].predicted_end_time.strftime('%I:%M %p') }}</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
