@@ -17,16 +17,16 @@
         <div class="row">
             <div class="col col-3">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                    <a href="{{ url_for('select_theatre') }}" class="list-group-item list-group-item-action">
                         <div class="d-flex flex-column"><span>Theatre</span><span>{{ selected_theatre.theatre_name }}</span></div>
-                    </li>
-                    <li class="list-group-item">
+                    </a>
+                    <a href="{{ url_for('select_date', theatre_id=selected_theatre.theatre_id) }}" class="list-group-item list-group-item-action">
                         <div class="d-flex flex-column"><span>Date</span><span>{{ selected_showdate.show_date.strftime('%d %B %Y') }}</span></div>
-                    </li>
-                    <li class="list-group-item">
+                    </a>
+                    <a href="{{ url_for('select_movies', theatre_id=selected_theatre.theatre_id, show_date=selected_showdate.show_date.strftime('%d-%m-%Y')) }}" class="list-group-item list-group-item-action">
                         <div class="d-flex flex-column"><span>Movies</span><span>{{ selected_movie_ids|length }} Movies selected</span></div>
-                    </li>
-                    <li class="list-group-item active"><span>Results</span></li>
+                    </a>
+                    <a class="list-group-item active list-group-item-action"><span>Results</span></a>
                 </ul>
             </div>
             <div class="col">

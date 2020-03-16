@@ -26,19 +26,16 @@ def select_theatre():
             theatre_dict[i.state].append(i)
         return render_template('theatres.html', theatres=theatre_dict)
     else:
-        print("Request received")
         return redirect(url_for('select_date', theatre_id=request.form.get('theatre_id')))
 
 
 @app.route('/<theatre_id>', methods=['GET', 'POST'])
 def select_date(theatre_id):
     if request.method == 'GET':
-        print("Changed to GET")
         selected_theatre = db.session.query(Theatre).filter_by(theatre_id=theatre_id).one()
         show_dates = db.session.query(ShowDate).filter_by(theatre_id=theatre_id).all()
         return render_template('dates.html', selected_theatre=selected_theatre, show_dates=show_dates)
     else:
-        print(theatre_id, request.form.get('show_date'))
         return redirect(url_for('select_movies', theatre_id=theatre_id, show_date=request.form.get('show_date')))
 
 
@@ -53,7 +50,6 @@ def select_movies(theatre_id, show_date):
         return render_template('movies.html', selected_theatre = selected_theatre,
                                selected_showdate = selected_showdate, movies = movies)
     else:
-        print(request.form.get('movies'))
         selected_movie_ids = [int(x) for x in request.form.get('movies').split('|')]
         show_date = datetime.strptime(show_date, '%d-%m-%Y').date()
         selected_theatre = db.session.query(Theatre).filter_by(theatre_id=theatre_id).one()
