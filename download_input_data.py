@@ -43,6 +43,10 @@ def get_showtimes(theatre_id: int, show_date: date):
     request_url = API_URL.format(theatreNumber=theatre_id, date=show_date.strftime("%m-%d-%y"))
     r = requests.get(request_url, headers={'X-AMC-Vendor-Key': api_key}, params={'page-size': 150,
                                                                                       'exclude-attributes': 'NOALIST'})
+    if '_embedded' not in r.json():
+        logger.error('No Showtimes : {id} - {date}'.format(id=theatre_id, date=date))
+        return
+    
     showtimes_json = r.json()['_embedded']['showtimes']
     for i in showtimes_json:
         showtime_datetime = dateutil.parser.isoparse(i['showDateTimeLocal'])
@@ -139,7 +143,7 @@ def download_movie_poster(movie_id):
     main_poster_url = get_main_poster_url(movie_id)
     if main_poster_url:
         format_poster_url = get_format_poster_url(main_poster_url)
-        file_path = os.path.join('/home/ubuntu/amcv2/amc', 'static', 'img', '{id}.png'.format(id=movie_id))
+        file_path = os.path.join(os.environ['BASE_DIR'], 'amc', 'static', 'img', '{id}.png'.format(id=movie_id))
         download_image(format_poster_url, file_path)
 
 

@@ -65,9 +65,7 @@ if __name__ == '__main__':
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
-    theatre_ids = [x[0] for x in db.session.query(Theatre.theatre_id).all()]
-    show_dates = [x[0] for x in db.session.query(ShowDate.show_date).all()]
+    theatre_dates = db.session.query(ShowDate.theatre_id, ShowDate.show_date).all()
 
-    for t_id in theatre_ids:
-        for s_date in show_dates:
-            get_results(t_id, s_date)
+    for t_id,s_date in theatre_dates:
+        get_results(t_id, s_date)
