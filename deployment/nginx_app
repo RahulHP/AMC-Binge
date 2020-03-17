@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name dev.rahulhp.me;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/home/ubuntu/AMC-Binge/amc.sock;
+    }
+}
