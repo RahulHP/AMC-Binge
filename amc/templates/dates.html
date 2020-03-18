@@ -28,7 +28,7 @@
             <div class="col col-9">
                 <ul class="list-group list-group-flush" id="date_holder">
                     {% for date in show_dates %}
-                    <a href="#" id="{{ date.show_date.strftime('%d-%m-%Y') }}" class="list-group-item list-group-item-action date_item">
+                    <a href="#" id="{{ date.show_date.strftime('%d-%m-%Y') }}" class="list-group-item list-group-item-action date_item {% if  date.number_movies <2 %} disabled {% endif %}">
                         <div class="d-flex flex-column"><strong>{{ date.show_date.strftime('%d %B %Y') }}</strong><span>{{ date.number_showtimes }} shows across {{ date.number_movies }} movies</span></div>
                     </a>
                     {% endfor %}
