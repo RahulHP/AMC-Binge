@@ -7,29 +7,30 @@
     <title>AMCBingeV2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar navbar-light navbar-expand-md">
-            <div class="container-fluid"><a class="navbar-brand" href="#">AMC Binge</a></div>
+            <div class="container-fluid"><span class="navbar-brand">AMC Binge</span></div>
         </nav>
         <div class="row">
             <div class="col col-3">
                 <ul class="list-group">
-                    <li class="list-group-item active"><span style="font-family: Roboto, sans-serif;font-weight:700">Theatre</span></li>
-                    <li class="list-group-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Date</span></li>
-                    <li class="list-group-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Movies</span></li>
-                    <li class="list-group-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Results</span></li>
+                    <a class="list-group-item list-group-item-action nav-item active"><span style="font-family: Roboto, sans-serif;font-weight:700">Theatre</span></a>
+                    <a class="list-group-item list-group-item-action nav-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Date</span></a>
+                    <a class="list-group-item list-group-item-action nav-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Movies</span></a>
+                    <a class="list-group-item list-group-item-action nav-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Results</span></a>
                 </ul>
             </div>
             <div class="col col-9">
                 <ul class="list-group list-group-flush" id="theatre_holder">
                     {% for state, theatre_list in theatres.items() %}
-                    <li class="list-group-item"><span style="font-family: Roboto, sans-serif;">{{ state }}</span>
+                    <li class="list-group-item"><span class="theatre-state">{{ state }}</span>
                         <ul class="list-group list-group-flush">
                             {% for theatre in theatre_list %}
-                                <a href="#" id="{{ theatre.theatre_id }}" class="list-group-item list-group-item-action theatre_item"><span style="font-family: Roboto, sans-serif;font-weight: 700">{{ theatre.theatre_name }}</span><span>&nbsp;{{ theatre.market_name }}, {{ theatre.postal_code }}</span></a>
+                                <a href="#" id="{{ theatre.theatre_id }}" class="list-group-item list-group-item-action theatre-item"><span style="font-family: Roboto, sans-serif;font-weight: 700">{{ theatre.theatre_name }}</span><span>&nbsp;{{ theatre.market_name }}, {{ theatre.postal_code }}</span></a>
                             {% endfor %}
                         </ul>
                     </li>
@@ -41,7 +42,7 @@
             <div class="col">
             <form method="post" id="submitform">
                 <input id="theatre_id" type="hidden" name="theatre_id" value="">
-                <button class="btn btn-primary" id="submit" type="submit" style="float: right" disabled>Next</button>
+                <button class="btn btn-success" id="submit" type="submit" style="float: right" disabled>Next</button>
             </form>
             </div>
         </div>
@@ -50,10 +51,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script>
 $(document).ready(function () {
-    $('.theatre_item').click(function (e) {
+    $('.theatre-item').click(function (e) {
         {#https://stackoverflow.com/a/26178517#}
         e.preventDefault();
-        $('#theatre_holder').find('.theatre_item').removeClass('active');
+        $('#theatre_holder').find('.theatre-item').removeClass('active');
         $(this).addClass('active');
         $('#theatre_id').attr('value', $(this).attr('id'));
         $('#submit').attr('disabled', false);

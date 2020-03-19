@@ -1,0 +1,95 @@
+.list-group-item.list-group-item-action.theatre-item {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #dee2e6!important;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  background-color: #ffffff;
+}
+
+.list-group-item.result-item {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #dee2e6!important;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  background-color: #ffffff;
+}
+
+.list-group-item.list-group-item-action.date-item {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #dee2e6!important;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  background-color: #ffffff;
+}
+
+.list-group-item.list-group-item-action.movie-item {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #dee2e6!important;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  background-color: #ffffff;
+}
+
+.list-group-item.list-group-item-action.nav-item.active {
+  background-color: #4caf50;
+}
+
+.list-group-item.list-group-item-action.movie-item.active {
+  background-color: #4caf50;
+}
+
+.list-group-item.list-group-item-action.date-item.active {
+  background-color: #4caf50;
+}
+
+.list-group-item.list-group-item-action.theatre-item.active {
+  background-color: #4caf50;
+}
+
+.movie-title {
+  font-size: 24px;
+  text-align: center;
+}
+
+.showtime-times {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  color: #6c757d!important;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.list-group-item:first-child {
+  margin-top: 0px;
+}
+
+.combo-time.combo-start {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.combo-time.combo-end {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.theatre-state {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+}
+
+.active.movie-item .movie-item-title {
+  color: #fff;
+  font-family: Roboto, sans-serif;
+}
+
+.movie-item-title {
+  margin-top: 16px;
+}
+
+.movie-image {
+    width: 120px;
+    height: 120px;
+    border-radius:50%;
+    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,0.1);
+}

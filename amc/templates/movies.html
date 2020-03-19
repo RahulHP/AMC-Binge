@@ -7,34 +7,35 @@
     <title>AMCBingeV2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar navbar-light navbar-expand-md">
-            <div class="container-fluid"><a class="navbar-brand" href="#">AMC Binge</a></div>
+            <div class="container-fluid"><span class="navbar-brand">AMC Binge</span></div>
         </nav>
         <div class="row">
             <div class="col col-3">
                 <ul class="list-group">
-                    <a href="{{ url_for('select_theatre') }}" class="list-group-item list-group-item-action">
+                    <a href="{{ url_for('select_theatre') }}" class="list-group-item list-group-item-action nav-item">
                         <div class="d-flex flex-column"><span style="font-family: Roboto, sans-serif;font-weight: 700">Theatre</span><span style="font-family: Roboto, sans-serif;">{{ selected_theatre.theatre_name }}</span></div>
                     </a>
-                    <a href="{{ url_for('select_date', theatre_id=selected_theatre.theatre_id) }}" class="list-group-item list-group-item-action">
+                    <a href="{{ url_for('select_date', theatre_id=selected_theatre.theatre_id) }}" class="list-group-item list-group-item-action nav-item">
                         <div class="d-flex flex-column"><span style="font-family: Roboto, sans-serif;font-weight: 700">Date</span><span style="font-family: Roboto, sans-serif;">{{ selected_showdate.show_date.strftime('%d %B %Y') }}</span></div>
                     </a>
-                    <a class="list-group-item list-group-item-action active"><span>Movies</span></a>
-                    <a class="list-group-item list-group-item-action disabled"><span>Results</span></a>
+                    <a class="list-group-item list-group-item-action nav-item active"><span>Movies</span></a>
+                    <a class="list-group-item list-group-item-action nav-item disabled"><span>Results</span></a>
                 </ul>
             </div>
             {%- for column in movies|slice(3) %}
             <div class="col col-3">
                 <ul class="list-group">
                     {% for movie in column %}
-                    <a href="#" class="list-group-item list-group-item-action movie_item" id="{{ movie.movie_id }}">
+                    <a href="#" class="list-group-item list-group-item-action movie-item" id="{{ movie.movie_id }}">
                         <div class="d-flex flex-column align-items-center">
-                            <img src="/static/img/{{ movie.movie_id }}.png" style="width: 120px;height: 120px;border-radius:50%;box-shadow: inset 0 0 0 1px hsla(0,0%,0%,0.1);">
-                            <span>{{ movie.movie_name }}</span>
+                            <img src="/static/img/{{ movie.movie_id }}.png" class="movie-image" >
+                            <span class="movie-item-title">{{ movie.movie_name }}</span>
                         </div>
                     </a>
                     {% endfor %}
@@ -57,7 +58,7 @@
 
     var selected_movies = new Set();
 
-    $('.movie_item').click(function (e) {
+    $('.movie-item').click(function (e) {
         {#https://stackoverflow.com/a/26178517#}
         e.preventDefault();
         var movie_id = $(this).attr('id');

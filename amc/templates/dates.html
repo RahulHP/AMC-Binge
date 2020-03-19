@@ -7,28 +7,29 @@
     <title>AMCBingeV2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar navbar-light navbar-expand-md">
-            <div class="container-fluid"><a class="navbar-brand" href="#">AMC Binge</a></div>
+            <div class="container-fluid"><span class="navbar-brand">AMC Binge</span></div>
         </nav>
         <div class="row">
             <div class="col col-3">
                 <ul class="list-group">
-                    <a href="{{ url_for('select_theatre') }}" class="list-group-item list-group-item-action">
+                    <a href="{{ url_for('select_theatre') }}" class="list-group-item list-group-item-action nav-item">
                         <div class="d-flex flex-column"><span style="font-family: Roboto, sans-serif;font-weight: 700">Theatre</span><span style="font-family: Roboto, sans-serif;">{{ selected_theatre.theatre_name }}</span></div>
                     </a>
-                    <a class="list-group-item list-group-item-action active"><span style="font-family: Roboto, sans-serif;font-weight:700">Date</span></a>
-                    <a class="list-group-item list-group-item-action disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Movies</span></a>
-                    <a class="list-group-item list-group-item-action disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Results</span></a>
+                    <a class="list-group-item list-group-item-action nav-item active"><span style="font-family: Roboto, sans-serif;font-weight:700">Date</span></a>
+                    <a class="list-group-item list-group-item-action nav-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Movies</span></a>
+                    <a class="list-group-item list-group-item-action nav-item disabled"><span style="font-family: Roboto, sans-serif;font-weight:700">Results</span></a>
                 </ul>
             </div>
             <div class="col col-9">
                 <ul class="list-group list-group-flush" id="date_holder">
                     {% for date in show_dates %}
-                    <a href="#" id="{{ date.show_date.strftime('%d-%m-%Y') }}" class="list-group-item list-group-item-action date_item {% if  date.number_movies <2 %} disabled {% endif %}">
+                    <a href="#" id="{{ date.show_date.strftime('%d-%m-%Y') }}" class="list-group-item list-group-item-action date-item {% if  date.number_movies <2 %} disabled {% endif %}">
                         <div class="d-flex flex-column"><strong>{{ date.show_date.strftime('%d %B %Y') }}</strong><span>{{ date.number_showtimes }} shows across {{ date.number_movies }} movies</span></div>
                     </a>
                     {% endfor %}
@@ -39,7 +40,7 @@
             <div class="col">
             <form method="post" id="submitform">
                 <input id="show_date" type="hidden" name="show_date" value="">
-                <button class="btn btn-primary" id="submit" type="submit" style="float: right" disabled>Next</button>
+                <button class="btn btn-success" id="submit" type="submit" style="float: right" disabled>Next</button>
             </form>
             </div>
         </div>
@@ -48,10 +49,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script>
 $(document).ready(function () {
-    $('.date_item').click(function (e) {
+    $('.date-item').click(function (e) {
         {#https://stackoverflow.com/a/26178517#}
         e.preventDefault();
-        $('#date_holder').find('.date_item').removeClass('active');
+        $('#date_holder').find('.date-item').removeClass('active');
         $(this).addClass('active');
         $('#show_date').attr('value', $(this).attr('id'));
         $('#submit').attr('disabled', false);
