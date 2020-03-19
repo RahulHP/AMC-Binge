@@ -46,7 +46,7 @@ def select_movies(theatre_id, show_date):
         show_date_dt = datetime.strptime(show_date, '%d-%m-%Y').date()
         selected_showdate = db.session.query(ShowDate).filter_by(theatre_id=theatre_id).filter_by(show_date=show_date_dt).one()
         movie_ids = selected_showdate.movie_ids.split(',')
-        movies = db.session.query(Movie).filter(Movie.movie_id.in_(movie_ids)).all()
+        movies = db.session.query(Movie).filter(Movie.movie_id.in_(movie_ids)).order_by(Movie.score.desc()).all()
         return render_template('movies.html', selected_theatre = selected_theatre,
                                selected_showdate = selected_showdate, movies = movies)
     else:
